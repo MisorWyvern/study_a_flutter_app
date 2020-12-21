@@ -30,19 +30,21 @@ class _ListaTransferenciasState extends State<ListaTransferencias> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          final Future<Transferencia> future = Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      FormularioTransferencia("Criar Transferência")));
-          future.then((_transferencia) {
-            if (_transferencia == null) return;
-            setState(() => widget._transferenciaList.add(_transferencia));
-          });
+          Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          FormularioTransferencia("Criar Transferência")))
+              .then((_transferencia) => updateList(_transferencia));
         },
         child: Icon(Icons.add),
       ),
     );
+  }
+
+  void updateList(Transferencia transferencia) {
+    if (transferencia == null) return;
+    setState(() => widget._transferenciaList.add(transferencia));
   }
 }
 

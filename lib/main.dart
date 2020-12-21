@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:study_a_flutter_app/widgets/lista_transferencias.dart';
+import 'package:study_a_flutter_app/pages/formulario_transferencia.dart';
 
 void main() {
-  runApp(StudyAFlutter());
+  runApp(StudyAFlutterApp());
 }
 
-class StudyAFlutter extends StatelessWidget {
+class StudyAFlutterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          title: Text("ByteBank (Tranferências)"),
-          actions: [],
-        ),
-        body: ListaTransferencias(),
+        body: FormularioTransferencia("Formulario Transferência"),
       ),
     );
   }

@@ -9,10 +9,18 @@ class StudyAFlutterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: ListaTransferencias("Transferências"),
+      theme: ThemeData(
+        primaryColor: Colors.indigo[900],
+        accentColor: Colors.cyanAccent[400],
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.cyanAccent[400],
+          textTheme: ButtonTextTheme.primary,
+        ),
       ),
+      debugShowCheckedModeBanner: false,
+      home: ListaTransferencias("Transferências"),
     );
   }
 }
+
+//ThemeData.dark(),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:study_a_flutter_app/models/transferencia.dart';
 import 'package:study_a_flutter_app/pages/formulario_transferencia.dart';
 
-class ListaTransferencias extends StatelessWidget {
+class ListaTransferencias extends StatefulWidget {
   final String title;
   final List<Transferencia> _transferenciaList =
       List.of([Transferencia(101010, 1275.52)]);
@@ -12,16 +12,21 @@ class ListaTransferencias extends StatelessWidget {
     Key key,
   }) : super(key: key);
   @override
+  _ListaTransferenciasState createState() => _ListaTransferenciasState();
+}
+
+class _ListaTransferenciasState extends State<ListaTransferencias> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
         actions: [],
       ),
       body: ListView.builder(
-        itemCount: _transferenciaList.length,
+        itemCount: widget._transferenciaList.length,
         itemBuilder: (BuildContext context, int index) =>
-            ItemTransferencia(_transferenciaList[index]),
+            ItemTransferencia(widget._transferenciaList[index]),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -30,8 +35,10 @@ class ListaTransferencias extends StatelessWidget {
               MaterialPageRoute(
                   builder: (context) =>
                       FormularioTransferencia("Criar Transferência")));
-          future
-              .then((_transferencia) => _transferenciaList.add(_transferencia));
+          future.then((_transferencia) {
+            if (_transferencia == null) return;
+            setState(() => widget._transferenciaList.add(_transferencia));
+          });
         },
         child: Icon(Icons.add),
       ),
@@ -53,12 +60,12 @@ class ItemTransferencia extends StatelessWidget {
       child: ListTile(
         leading: _transferencia.icon != null
             ? Icon(_transferencia.icon)
-            : Icon(Icons.all_inclusive),
+            : Icon(Icons.monetization_on),
         title: _transferencia.value != null
-            ? Text(_transferencia.value.toString())
+            ? Text("R\$ ${_transferencia.value.toStringAsFixed(2)}")
             : Text(""),
         subtitle: _transferencia.accountNumber != null
-            ? Text(_transferencia.accountNumber.toString())
+            ? Text("Conta: ${_transferencia.accountNumber.toString()}")
             : Text(""),
       ),
     );

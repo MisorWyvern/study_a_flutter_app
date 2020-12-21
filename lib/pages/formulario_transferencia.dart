@@ -18,26 +18,28 @@ class FormularioTransferencia extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Editor(
-                  controller: _accountNumberController,
-                  label: "Número da Conta",
-                  hint: "0000",
-                  icon: Icons.money),
-              Editor(
-                  controller: _valueController,
-                  label: "Valor",
-                  hint: "0.00",
-                  icon: Icons.monetization_on),
-              SizedBox(
-                width: double.infinity,
-                child: RaisedButton(
-                  onPressed: () => _createTransferencia(context),
-                  child: Text("Criar".toUpperCase()),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Editor(
+                    controller: _accountNumberController,
+                    label: "Número da Conta",
+                    hint: "0000",
+                    icon: Icons.money),
+                Editor(
+                    controller: _valueController,
+                    label: "Valor",
+                    hint: "0.00",
+                    icon: Icons.monetization_on),
+                SizedBox(
+                  width: double.infinity,
+                  child: RaisedButton(
+                    onPressed: () => _createTransferencia(context),
+                    child: Text("Criar".toUpperCase()),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ));
   }

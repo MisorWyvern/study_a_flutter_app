@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:study_a_flutter_app/models/transferencia.dart';
+import 'package:study_a_flutter_app/pages/formulario_transferencia.dart';
 
 class ListaTransferencias extends StatelessWidget {
   final String title;
+  final List<Transferencia> _transferenciaList =
+      List.of([Transferencia(101010, 1275.52)]);
 
-  const ListaTransferencias(
+  ListaTransferencias(
     this.title, {
     Key key,
   }) : super(key: key);
@@ -15,11 +18,22 @@ class ListaTransferencias extends StatelessWidget {
         title: Text(title),
         actions: [],
       ),
-      body: Column(
-        children: [
-          ItemTransferencia(
-              Transferencia(101010, 1000.0, icon: Icons.monetization_on)),
-        ],
+      body: ListView.builder(
+        itemCount: _transferenciaList.length,
+        itemBuilder: (BuildContext context, int index) =>
+            ItemTransferencia(_transferenciaList[index]),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final Future<Transferencia> future = Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      FormularioTransferencia("Criar Transferência")));
+          future
+              .then((_transferencia) => _transferenciaList.add(_transferencia));
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

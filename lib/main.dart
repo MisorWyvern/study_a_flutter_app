@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_a_flutter_app/pages/lista_transferencias.dart';
+import 'package:study_a_flutter_app/pages/dashboard_page.dart';
 
 void main() {
   runApp(StudyAFlutterApp());
@@ -18,7 +18,7 @@ class StudyAFlutterApp extends StatelessWidget {
         ),
       ),
       debugShowCheckedModeBanner: false,
-      home: ListaTransferencias("Transferências"),
+      home: Dashboard(),
     );
   }
 }

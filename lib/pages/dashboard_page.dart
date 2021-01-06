@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:study_a_flutter_app/models/saldo.dart';
 import 'package:study_a_flutter_app/widgets/saldo_card.dart';
 
 class Dashboard extends StatelessWidget {
@@ -11,7 +10,7 @@ class Dashboard extends StatelessWidget {
       ),
       body: Align(
         alignment: Alignment.topCenter,
-        child: SaldoCard(saldo: Saldo(50)),
+        child: SaldoCard(),
       ),
     );
   }

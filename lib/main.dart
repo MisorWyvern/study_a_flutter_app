@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:study_a_flutter_app/pages/dashboard_page.dart';
 
+import 'models/saldo.dart';
+
 void main() {
-  runApp(StudyAFlutterApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (BuildContext context) => Saldo(0),
+      child: StudyAFlutterApp(),
+    ),
+  );
 }
 
 class StudyAFlutterApp extends StatelessWidget {

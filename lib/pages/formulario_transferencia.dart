@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:study_a_flutter_app/models/transfer_list.dart';
 import 'package:study_a_flutter_app/models/transferencia.dart';
 import 'package:study_a_flutter_app/widgets/editor.dart';
+
+import '../models/saldo.dart';
 
 class FormularioTransferencia extends StatelessWidget {
   final String title;
@@ -32,7 +36,7 @@ class FormularioTransferencia extends StatelessWidget {
                     hint: "0.00",
                     icon: Icons.monetization_on),
                 SizedBox(
-                  width: double.infinity,
+                  width: double.maxFinite,
                   child: RaisedButton(
                     onPressed: () => _createTransferencia(context),
                     child: Text("Criar".toUpperCase()),
@@ -52,7 +56,13 @@ class FormularioTransferencia extends StatelessWidget {
       return;
     }
 
+    bool isValidTransfer = Provider.of<Saldo>(context, listen: false).withdrawal(value);
+    if(isValidTransfer == false){
+      return;
+    }
+
     final createdTransferencia = Transferencia(accountNumber, value);
-    Navigator.pop(context, createdTransferencia);
+    Provider.of<TransferList>(context, listen: false).add(createdTransferencia);
+    Navigator.pop(context);
   }
 }

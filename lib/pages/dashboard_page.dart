@@ -5,6 +5,7 @@ import 'package:study_a_flutter_app/widgets/saldo_card.dart';
 
 import '../models/saldo.dart';
 import 'formulario_transferencia.dart';
+import 'lista_transferencias.dart';
 
 class Dashboard extends StatelessWidget {
   @override
@@ -24,19 +25,27 @@ class Dashboard extends StatelessWidget {
             children: [
               RaisedButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => FormularioTransferencia("Make a Transfer")));
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) =>
+                          FormularioTransferencia("Make a Transfer")));
                 },
                 child: Text("Transfer".toUpperCase()),
               ),
               RaisedButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => DepositForm()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => DepositForm()));
                 },
                 child: Text("Deposit".toUpperCase()),
               ),
             ],
+          ),
+          RaisedButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => ListaTransferencias("Transfer List")));
+            },
+            child: Text("Transfer List".toUpperCase()),
           ),
         ],
       ),

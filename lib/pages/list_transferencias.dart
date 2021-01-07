@@ -1,32 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:study_a_flutter_app/models/transfer_list.dart';
 import 'package:study_a_flutter_app/models/transferencia.dart';
 import 'package:study_a_flutter_app/pages/formulario_transferencia.dart';
 
-class ListaTransferencias extends StatefulWidget {
+class ListTransferencias extends StatelessWidget {
   final String title;
-  final List<Transferencia> _transferenciaList =
-      List.of([Transferencia(101010, 1275.52)]);
 
-  ListaTransferencias(
-    this.title, {
-    Key key,
-  }) : super(key: key);
-  @override
-  _ListaTransferenciasState createState() => _ListaTransferenciasState();
-}
-
-class _ListaTransferenciasState extends State<ListaTransferencias> {
+  const ListTransferencias({Key key, @required this.title})
+      : assert(title != null),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
         actions: [],
       ),
-      body: ListView.builder(
-        itemCount: widget._transferenciaList.length,
-        itemBuilder: (BuildContext context, int index) =>
-            ItemTransferencia(widget._transferenciaList[index]),
+      body: Consumer<TransferList>(
+        builder: (context, consumer, child) => ListView.builder(
+          itemCount: consumer.transferList.length,
+          itemBuilder: (BuildContext context, int index) =>
+              ItemTransferencia(consumer.transferList[index]),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -34,17 +30,11 @@ class _ListaTransferenciasState extends State<ListaTransferencias> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          FormularioTransferencia("Criar Transferência")))
-              .then((_transferencia) => updateList(_transferencia));
+                          FormularioTransferencia("Criar Transferência")));
         },
         child: Icon(Icons.add),
       ),
     );
-  }
-
-  void updateList(Transferencia transferencia) {
-    if (transferencia == null) return;
-    setState(() => widget._transferenciaList.add(transferencia));
   }
 }
 
